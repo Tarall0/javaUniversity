@@ -1,31 +1,60 @@
-public class Student extends Person{
+public class Person {
 	
-	private String codeu;
+	protected String name;
+	private String sname;
+	private String role;
+	private int age;
 	
-	public Student(String codeu, String name, String sname) {
-		super(name, sname);
-		
-		this.codeu = codeu;
+	public Person(String name, String sname, String role, int age) {
+		this.name = name;
+		this.sname = sname;
+		this.role = role;
+		this.age = age;
 	}
 	
-	public Student(String codeu, String name, String sname, String role) {
-		super(name, sname, role);
-		this.codeu = codeu;
+	public Person(String name, String sname) {
+		this.name = name;
+		this.sname = sname;
+		this.role = "Not specified";
+		this.age = 0;
 	}
 	
-	public Student(String codeu, String name, String sname, String role, int age) {
-		super(name, sname, role, age);
-		this.codeu = codeu;
+	public Person(String name, String sname, String role) {
+		this.name = name;
+		this.sname = sname;
+		this.role = role;
+		this.age = 0;
 	}
 	
-	public String getCodeu() {
-		return codeu;
+	/**Setter Methods **/
+	
+	public void setAge(int age) {
+		this.age = age;
 	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	/** Getter Methods **/
 	
 	public String getName() {
-		System.out.println("** Students Info **");
+		System.out.println(" ** User details **");
 		return name;
 	}
-
 	
+	public String getSname() {
+		return sname;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+
 }
+
