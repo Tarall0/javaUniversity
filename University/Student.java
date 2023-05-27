@@ -1,5 +1,3 @@
-package University2;
-
 public class Student extends Person{
 	
 	private String codeu;
@@ -22,6 +20,11 @@ public class Student extends Person{
 	
 	public String getCodeu() {
 		return codeu;
+	}
+	
+	public String getName() {
+		System.out.println("** Students Info **");
+		return name;
 	}
 
 	
