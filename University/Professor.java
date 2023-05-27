@@ -1,15 +1,29 @@
-package University;
+package University2;
 
-public class Professor extends Person{
-	private String subject;
+public class Professor extends Person {
 	
-	public Professor(String subject, String name, String sname, String role) {
-		super(name, sname, role);
+	private String subject;
+	private String salary;
+	
+	public Professor(String name, String sname, String role, int age, String subject, String salary) {
+		super(name, sname, role, age);
 		this.subject = subject;
+		this.salary = salary;
 	}
+	
+	public Professor(String name, String sname, String role, int age, String subject) {
+		super(name, sname, role, age);
+		this.subject = subject;
+		this.salary = "None";
+	}
+	
 	
 	public String getSubject() {
 		return subject;
+	}
+	
+	public String getSalary() {
+		return salary;
 	}
 
 }
