@@ -1,78 +1,33 @@
-package eTivityWarehouses;
-
+import java.util.*;
 
 public class Order{
 	
-	private int id_order;
+	private int id;
 	private User user;
-	private Product product;
+	private List<Product> products;
 	
-	public Order(int id_order, User user, Product product) {
-		
+	public Order(int id, User user) {
+		this.id = id;
 		this.user = user;
-		this.product = product;
-		this.id_order = id_order;
-		
+		this.products = new ArrayList<>();
 	}
 	
-	public double getOrderPrice() {
-		double price = product.getPrice();
-		
-		return price;
+	public int getId() {
+		return id;
 	}
 	
-	public String getUserName() {
-		String username = user.getUsername();
-		return username;
+	public String getUser() {
+		return user.getName();
 	}
 	
-	public String getUserLastName() {
-		String lastname = user.getLastname();
-		return lastname;
+	public void addProduct(Product product) {
+		products.add(product);
 	}
 	
-	public String getAddressShip() {
-		String shipto = user.getAddress();
-		return shipto;
+	public List<Product> getProducts(){
+		return products;
 	}
 	
-	public int getIdOrder() {
-		return id_order;
-	}
-	
-	public int getIdProduct() {
-		int idprod = product.getID();
-		
-		return idprod;
-	}
-	
-	public int processOrder() {
-		int prodTotal = product.getQuantity();
-		
-		if(prodTotal <= 0) {
-			System.out.println("");
-			System.out.println("We are out of stock!");
-			System.out.println("Product not available at the moment");
-		}
-		
-		else {
-			System.out.println("");
-			System.out.println("Thank you for your order");
-			product.setOrder();
-			
-			System.out.println("");
-			System.out.println("Order ID:"+id_order+" Product ID:"+product.getID()+"| Ship To:"+user.getAddress());
-			System.out.println("First Name: "+user.getUsername());
-			System.out.println("Family Name: "+user.getLastname());
-		}
-		
-		
-		
-		
-		return prodTotal;
-		
-		
-		
-	}
 
 }
+
