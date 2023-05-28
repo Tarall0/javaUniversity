@@ -1,27 +1,20 @@
-package eTivityWarehouses;
 
-public class Product extends Warehouse{
+public class Product extends Warehouse {
 	
 	private int id;
+	private String name;
 	private double price;
-	private String desc;
 	private int quantity;
-
 	
-	public Product(int id, double price, String desc, int quantity, int id_warehouse) {
+	public Product(int id, String name, double price, int quantity, int id_warehouse) {
 		super(id_warehouse);
 		this.id = id;
+		this.name = name;
 		this.price = price;
-		this.desc = desc;
 		this.quantity = quantity;
-		
 	}
 	
-	public String getDesc() {
-		return desc;
-	}
-	
-	public int getID() {
+	public int getId() {
 		return id;
 	}
 	
@@ -29,12 +22,14 @@ public class Product extends Warehouse{
 		return price;
 	}
 	
+	public String getname() {
+		return name;
+	}
+	
 	public int getQuantity() {
 		return quantity;
 	}
 	
-	public void setOrder() {
-		this.quantity = quantity -1;
-	}
+	
 
 }
