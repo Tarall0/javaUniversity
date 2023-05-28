@@ -1,15 +1,14 @@
-package eTivityWarehouses;
 
 public class Warehouse {
 	
 	protected int id_warehouse;
 	private String location;
-
+	private String status;
 	
-	public Warehouse(int id_warehouse, String location) {
+	public Warehouse(int id_warehouse, String location, String status) {
 		this.id_warehouse = id_warehouse;
 		this.location = location;
-
+		this.status = status;
 	}
 	
 	public Warehouse(int id_warehouse) {
@@ -24,10 +23,8 @@ public class Warehouse {
 		return location;
 	}
 	
-
-	
-	public void editWarehouse() {
-		System.out.println("Do you want to edit warehouse info?");
+	public String getStatus() {
+		return status;
 	}
 
 }
