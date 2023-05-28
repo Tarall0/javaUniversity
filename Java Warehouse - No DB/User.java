@@ -1,37 +1,32 @@
-package eTivityWarehouses;
 
 public class User {
 	private int id;
 	private String name;
-	private String sname;
+	private String lastname;
 	private String address;
-	private String role;
 	
-	public User(int id, String name, String sname, String address, String role) {
+	public User(int id, String name, String lastname, String address) {
 		this.id = id;
 		this.name = name;
-		this.sname = sname;
+		this.lastname = lastname;
 		this.address = address;
-		this.role = role;
 	}
 	
-	public int getUserID() {
+	public int getUserId() {
 		return id;
 	}
 	
-	public String getUsername() {
+	public String getName() {
 		return name;
 	}
 	
 	public String getLastname() {
-		return sname;
+		return lastname;
 	}
 	
 	public String getAddress() {
 		return address;
 	}
-	
-	public String role() {
-		return role;
-	}
+			
+
 }
