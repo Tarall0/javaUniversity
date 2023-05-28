@@ -10,4 +10,5 @@ Using the3 same example, I applied the polymorfism and the overriding of the met
 
 
 ### | Warehouse example
-The delivery of the exercise was to create a micro management system for a few classes, Product, Warehouse, User and Order. The first example does not use a database to manage the data
+The delivery of the exercise was to create a micro management system for a few classes, Product, Warehouse, User and Order. The user should be procees an order. The first example does not use a database to manage the data
+
