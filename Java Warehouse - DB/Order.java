@@ -12,6 +12,17 @@ public class Order{
 		this.products = new ArrayList<>();
 	}
 	
+	public void save(Connection connection) throws SQLException {
+		String query = "INSERT INTO order (id, user, products) VALUES (?, ?, ?);
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+            		statement.setInt(1, id);
+            		statement.setString(2, user);
+            		statement.setArrayList(3, products);
+            		statement.executeUpdate();
+        	}
+        // should implement insert/update/delete/retrieval operations
+   	}
+	
 	public int getId() {
 		return id;
 	}
