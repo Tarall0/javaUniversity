@@ -20,14 +20,7 @@ class Order {
         return user;
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
+  
     // Database operations
     public void save(Connection connection) throws SQLException {
         String query = "INSERT INTO orders (id, user) VALUES (?, ?)";
