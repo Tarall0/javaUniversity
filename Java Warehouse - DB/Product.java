@@ -1,14 +1,16 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class Product extends Warehouse {
+public class Product  {
 	
 	private int id;
 	private String name;
 	private double price;
 	private int quantity;
 	
-	public Product(int id, String name, double price, int quantity, int id_warehouse) {
-		super(id_warehouse);
+	public Product(int id, String name, double price, int quantity) {
+		
 		this.id = id;
 		this.name = name;
 		this.price = price;
