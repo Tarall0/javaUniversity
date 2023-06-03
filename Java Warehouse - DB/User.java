@@ -18,15 +18,26 @@ public class User {
 		this.role = role;
 	}
 	
-	// Database operations
+	public User(String name, String lastname, String address, String role) {
+		this.name = name;
+		this.lastname = lastname;
+		this.address = address;
+		this.role = role;
+	}
+	
+	public User(int id) {
+		this.id = id;
+	}
+	
+	// Database operations class User
+	
     public void save(Connection connection) throws SQLException {
-        String query = "INSERT INTO user (id, name, lastname, address) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO user (name, lastname, address, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            statement.setString(2, name);
-            statement.setString(3, lastname);
-            statement.setString(4, address);
-            statement.setString(5, role);
+            statement.setString(1, name);
+            statement.setString(2, lastname);
+            statement.setString(3, address);
+            statement.setString(4, role);
             statement.executeUpdate();
         }
     }
@@ -56,10 +67,18 @@ public class User {
         }
     }
     
- 
+    public void update(Connection connection, int userId, String name, String lastname, String address, String role) throws SQLException {
+		String query = "UPDATE user SET name=?, lastname=?, address=?, role=? WHERE id=?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        	statement.setString(1, name);
+        	statement.setString(2, lastname);
+        	statement.setString(3, address);
+        	statement.setString(4, role);
+            statement.executeUpdate();
+        }
+    }
     
-   
-
+    // Getter methods class User
 	
 	public int getUserId() {
 		return id;
