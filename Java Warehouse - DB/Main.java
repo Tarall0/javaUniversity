@@ -8,6 +8,7 @@ public class Main {
 	public static final String RESET = "\u001B[0m";
 	public static final String PURPLE = "\u001B[35m";
 	public static final String YELLOW = "\u001B[33m";
+	private static String totalProduct;
 	
 	
     public static void main(String[] args) {
@@ -41,6 +42,8 @@ public class Main {
             
             // Products Current List
             
+            int totalProducts = 0;
+            
             List<Product> products = shop.getAllProducts(connection);
             System.out.println("*************************");
             System.out.println("***     Products      ***");
@@ -52,6 +55,8 @@ public class Main {
                 System.out.println("Price: " +GREEN+ product.getPrice()+"$"+RESET);
                 System.out.println("Quantiy: " + product.getQuantity());
                 System.out.println("----------------------");
+                
+               
             }
             
             List<User> users = shop.getAllUsers(connection);
@@ -64,6 +69,64 @@ public class Main {
                 System.out.println("----------------------");
                
             }
+            
+            int choice = 0;
+            
+            Scanner in = new Scanner(System.in);
+            
+            System.out.println("");
+            System.out.println("");
+    		
+            System.out.println("Select an option (1, 2) >");
+			System.out.println("1. Administrator");
+			System.out.println("2. User");
+    		
+    		choice = in.nextInt();
+    			
+    		switch(choice){
+    		case 1: 
+    			int id = 1;
+    			System.out.println("");
+    			System.out.println("Welcome "+shop.getUserAdmin(connection, id));
+    			System.out.println("As an Administrator, you can add, update or delete products. As Administrato, you will also be able to manage users ");
+    			System.out.println("");
+    			System.out.println("Select an option (1, 2, 3) >");
+    			System.out.println("1. Add Product");
+				System.out.println("2. Delete Product");
+				System.out.println("3. Edit product");
+				System.out.println("");
+    			
+    				
+    			int choiceAdmin = 0;
+    	            
+    	        Scanner inAdmin = new Scanner(System.in);
+    	        choiceAdmin = inAdmin.nextInt();
+    	        switch(choiceAdmin){
+    			case 1: 
+  
+    				System.out.println(PURPLE+"| 1. Add Product"+RESET);
+    				System.out.println("");
+    				
+    				
+    				break;
+    			case 2:
+    				System.out.println(PURPLE+"| 2. Delete Product"+RESET);
+    				System.out.println("");
+    				break;
+    				
+    			case 3:
+    				System.out.println(PURPLE+"| 3. Edit Product"+RESET);
+    				System.out.println("");
+    				break;
+    			
+    			}
+    				
+    			break;
+    		case 2:
+    			System.out.println("You are logged in as a user");
+    			break;
+    			
+    			}
             
 
           

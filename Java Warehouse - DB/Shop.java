@@ -5,13 +5,6 @@ import java.sql.*;
 
 public class Shop {
 	
-	private List<Product> products;
-	private List<User> users;
-	private List<Order> orders;
-	private int nextProductId;
-	private int nextUserId;
-	private int nextOrderId;
-
 	// Database connection properties
     private static final String DB_URL = "jdbc:mysql://localhost:3306/shop";
     private static final String DB_USERNAME = "root";
@@ -48,6 +41,9 @@ public class Shop {
                 int quantity = resultSet.getInt("quantity");
                 Product product = new Product(id, name, price, quantity);
                 products.add(product);
+                
+                
+               
             }
         }
         return products;
@@ -70,30 +66,28 @@ public class Shop {
         }
         return users;
     }
+    
+    
+    public User getUserAdmin(Connection connection, int userId) throws SQLException {
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String lastname = resultSet.getString("lastname");
+                    String address = resultSet.getString("address");
+                    String role = resultSet.getString("role");
+                    return new User(id, name, lastname, address, role);
+                   
+                    
+                }
+            }
+        }
+        return null;
+    }
 
 
-	
-	public Product createProduct(String name, double price, int quantity) {
-		Product product = new Product(nextProductId++, name, price, quantity);
-		products.add(product);
-		return product;
-	}
-	
-	public User createUser(String name, String lastname, String address, String role) {
-		User user = new User(nextUserId++, name, lastname, address, role);
-		users.add(user);
-		return user;
-	}
-	
-	public Order createOrder(User user) {
-		Order order = new Order(nextOrderId++, user);
-		orders.add(order);
-		return order;
-	}
-	
-	
-	public List<Order> getOrders(){
-		return orders;
-	}
 
 }
