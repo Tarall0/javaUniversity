@@ -88,7 +88,8 @@ public class Main {
     			int id = 1;
     			System.out.println("");
     			System.out.println("Welcome "+shop.getUserAdmin(connection, id));
-    			System.out.println("As an Administrator, you can add, update or delete products. As Administrato, you will also be able to manage users ");
+    			System.out.println("As an Administrator, you can "
+    					+ "add, update or delete products. As Administrato, you will also be able to manage users ");
     			System.out.println("");
     			System.out.println("Select an option (1, 2, 3) >");
     			System.out.println("1. Add Product");
