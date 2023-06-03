@@ -9,6 +9,10 @@ public class Product  {
 	private double price;
 	private int quantity;
 	
+	public Product(int id) {
+		this.id = id;
+	}
+	
 	public Product(int id, String name, double price, int quantity) {
 		
 		this.id = id;
@@ -27,7 +31,27 @@ public class Product  {
             statement.executeUpdate();
         }
     }
+	
+	public void del(Connection connection) throws SQLException {
+		String query = "DELETE FROM products WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
+	
+	public void upd(Connection connection, int productId, String editName, double newPrice, int editQuantity) throws SQLException {
+		String query = "UPDATE products SET name=?, price=?, quantity=? WHERE id=?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        	statement.setString(1, editName);
+            statement.setDouble(2, newPrice);
+            statement.setInt(3, editQuantity);
+            statement.setInt(4, productId);
+            statement.executeUpdate();
+        }
+    }
 
+	// Methods to get values from Product
 	
 	public int getId() {
 		return id;
@@ -43,6 +67,20 @@ public class Product  {
 	
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	// Methods to set new values Product
+	
+	public void setPrice(double edit_price) {
+		this.price = edit_price;
+	}
+	
+	public void setName(String edit_name) {
+		this.name = edit_name;
+	}
+	
+	public void setQuantity(int edit_quantity) {
+		this.quantity = edit_quantity;
 	}
 	
 	public void takeOne() {
