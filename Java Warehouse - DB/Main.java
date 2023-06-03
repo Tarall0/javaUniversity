@@ -37,17 +37,15 @@ public class Main {
           //  p2.save(connection);
           //  p3.save(connection);
 
-            // Create users
-            User u1 = new User(1, "Francesco", "Tarantino", "Test Street", "Administrator");
-            User u2 = new User(2, "User 2",  "Test", "Test Street", "User");
+     
             
             Admin a1 = new Admin(1, "Francesco", "Tarantino", "Test Street", "Administrator", "CEO and Dev");
            // u1.save(connection);
            // u2.save(connection);
 
             // Create orders
-            Order o1 = new Order(1, u1);
-            Order o2 = new Order(2, u2);
+            //Order o1 = new Order(1, u1);
+           //  Order o2 = new Order(2, u2);
            // o1.addProduct(p1);
            // o1.addProduct(p2);
            // o2.addProduct(p2);
@@ -101,14 +99,17 @@ public class Main {
     		switch(choice){
     		case 1: 
     			System.out.println("");
-    			System.out.println("Welcome "+a1.getName()+" - "+a1.getRole()+" ~ "+ a1.getRank()+" )");
-    			System.out.println("As an Administrator, you can "
-    					+ "add, update or delete products. As Administrato, you will also be able to manage users ");
+    			System.out.println("Welcome "+a1.getName()+" - "+RED+a1.getRole()+RESET+" ~ "+ a1.getRank()+" )");
+    			System.out.println("\033[3mAs an Administrator, you can "
+    					+ "add, update or delete products. As Administrato, you will also be able to manage users\033[0m");
     			System.out.println("");
     			System.out.println("Select an option (1, 2, 3) >");
     			System.out.println("1. Add Product");
 				System.out.println("2. Delete Product");
 				System.out.println("3. Edit product");
+				System.out.println("4. Add user");
+				System.out.println("5. Delete user");
+				System.out.println("6. Edit user");
 				System.out.println("");
     			
     				
@@ -125,19 +126,14 @@ public class Main {
     				System.out.println("");
     				System.out.print("Product ID:"+YELLOW);
     				int new_id = in.nextInt();
-    				System.out.print(RESET+"Product Name: "+YELLOW);
-    				String new_name = in.next();
     				System.out.print(RESET+"Product Price: "+YELLOW);
     				double new_price = in.nextDouble();
     				System.out.print(RESET+"Product Quantity: "+YELLOW);
     				int new_quant = in.nextInt();
-    			
-    				
-    				
+    				System.out.print(RESET+"Product Name: "+YELLOW);
+    				String new_name = in.next();
     				Product pAdd = new Product(new_id, new_name, new_price, new_quant);
-    				
     				pAdd.save(connection);
-    				
     				System.out.println(GREEN+"Product has been added!");
     				
     				break;
@@ -157,10 +153,8 @@ public class Main {
     				System.out.print("Product ID: "+YELLOW);
     				int edit_id = in.nextInt();
     				Product pEdit = new Product(edit_id);
-    				
-    				
     				System.out.print(RESET+"Product Name:"+YELLOW);
-    				String edit_name = in.next();
+    				String edit_name = in.nextLine();
     				pEdit.setName(edit_name);
     				System.out.print(RESET+"Product Price:"+YELLOW);
     				double edit_price = in.nextDouble();
@@ -172,10 +166,57 @@ public class Main {
     				pEdit.upd(connection, edit_id, edit_name, edit_price, edit_quant);
     				break;
     			
-    			
+    			case 4:
+    				System.out.println(PURPLE+"| 4. Add user"+RESET);
+    				System.out.println("");
+    				System.out.print("First Name: "+YELLOW);
+    				String firstname = in.next();
+    				System.out.print(RESET+"Last Name: "+YELLOW);
+    				String lastname = in.next();
+    				System.out.print(RESET+"Role: "+YELLOW);
+    				String roleuser = in.next();
+    				System.out.print(RESET+"Address: "+YELLOW);
+    				String addressuser = in.next();
+    				User addUser = new User(firstname, lastname, addressuser, roleuser);
+    				addUser.save(connection);
+    				System.out.println(GREEN+"User has been added successfully!");
+    				break;
+    				
+    			case 5:
+    				System.out.println(PURPLE+"| 5. Delete user"+RESET);
+    				System.out.println("");
+    				System.out.print("Insert User ID: "+YELLOW);
+    				int userID = in.nextInt();
+    				User uDel = new User(userID);
+    				uDel.delete(connection);
+    				System.out.println(RED+"The User (ID: "+uDel.getUserId()+") has been removed!"+RESET);
+    				break;
+    			case 6:
+    				System.out.println(PURPLE+"| 5. Edit user"+RESET);
+    				System.out.println("");
+    				System.out.print("Insert User ID: "+YELLOW);
+    				int edituserID = in.nextInt();
+    				User userEdit = new User(edituserID);
+    				System.out.println(RESET+"New name: "+YELLOW);
+    				String newUsername = in.next();
+    				System.out.println(RESET+"New lastname: "+YELLOW);
+    				String newLastname = in.next();
+    				System.out.println(RESET+"New address: "+YELLOW);
+    				String newAddress = in.next();
+    				System.out.println(RESET+"New role: "+YELLOW);
+    				String newRole = in.next();
+    				userEdit.update(connection, edituserID, newUsername, newLastname, newAddress, newRole);
+    				System.out.println(CYAN+"The user (ID: "+userEdit.getUserId()+") has been modified!"+RESET);
+    				break;
+    				
+    				
+    				
+    				
     			}
     				
     			break;
+    
+    			
     		case 2:
     			System.out.println("You are logged in as a user");
     			break;
