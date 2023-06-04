@@ -25,8 +25,8 @@ class Order {
     }
     
     public void addProduct(Product product) {
-		products.add(product);
-	}
+	products.add(product);
+    }
 
     public void setProducts(List<Product> products) {
         this.products = products;
