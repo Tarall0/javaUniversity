@@ -6,7 +6,7 @@ class Order {
     private User user;
     private static List<Product> products;
 
-    public Order(int id, User user) {
+    public Order(int id, User user, Shop shop) {
         this.id = id;
         this.user = user;
         this.products = new ArrayList<>();
@@ -19,14 +19,27 @@ class Order {
     public User getUser() {
         return user;
     }
+    
+    public List<Product> getProducts() {
+        return products;
+    }
+    
+    public void addProduct(Product product) {
+		products.add(product);
+	}
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
   
     // Database operations
     public void save(Connection connection) throws SQLException {
-        String query = "INSERT INTO orders (id, user) VALUES (?, ?)";
+        String query = "INSERT INTO orders (id, user, products) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             statement.setInt(2, user.getUserId());
+            statement.setString(3, products.toString());
             statement.executeUpdate();
         }
     }
