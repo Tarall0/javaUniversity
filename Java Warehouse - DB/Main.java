@@ -44,7 +44,8 @@ public class Main {
            // u2.save(connection);
 
             // Create orders
-            //Order o1 = new Order(1, u1);
+           
+   
            //  Order o2 = new Order(2, u2);
            // o1.addProduct(p1);
            // o1.addProduct(p2);
@@ -218,9 +219,68 @@ public class Main {
     
     			
     		case 2:
-    			System.out.println("You are logged in as a user");
-    			break;
+    			System.out.println("You are logged in as a User");
+    			System.out.println("Select an option (1, 2, 3) >");
+    			System.out.println("1. Buy");
+				System.out.println("3. Edit info");
     			
+    			
+    		
+    			int userChoose = 0;
+    			
+    			Scanner uin = new Scanner(System.in);
+    			
+    			userChoose = uin.nextInt();
+    			
+    			switch(userChoose) {
+    			case 1:
+    				
+    				int orderid = 2;
+    				
+    				Order order = new Order(orderid, new User("John", "Snow", "Winterfell", "User"), shop);
+    			
+    		        int productChoice = 1;
+    		        while (productChoice != 0) {
+    		            System.out.print("Enter a product ID to add (or '0' to finish): ");
+    		            productChoice = in.nextInt();
+    		            if (productChoice != 0) {
+    		                int productId = productChoice;
+    		                Product product =  shop.getProductById(connection, productId);
+    		                if (product != null) {
+    		                    order.addProduct(product);
+    		             
+    		                    System.out.println("Product added to the order.");
+    		                } else {
+    		                    System.out.println("Product not found.");
+    		                }
+    		                
+    		            }
+    		        }
+    		        orderid++;
+    		        order.save(connection);
+    		        order.setProducts(shop.getProductsForOrder(connection, order.getId()));
+    		        
+    		        System.out.println("Order ID: " + order.getId());
+    		        System.out.println("User: " + order.getUser().getName());
+    		        System.out.println("Shipment details: "+order.getUser().getAddress());
+    		        System.out.println("Products:"+order.getProducts());
+    		        for (Product product : order.getProducts()) {
+    		            System.out.println("Product ID: " + product.getId());
+    		            System.out.println("Name: " + product.getname());
+    		            System.out.println("Price: " + product.getPrice());
+    		            System.out.println("----------------------");
+    		        }
+
+    		       
+    		  
+    		        
+    		        
+    			}
+    			
+    			
+    			
+    			
+    			break;
     			}
             
 
