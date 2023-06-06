@@ -29,34 +29,11 @@ public class Main {
         Shop shop = new Shop();
         
         try (Connection connection = shop.getConnection()) {
-            // Create products
+        
             Product p1 = new Product(1, "Product 1", 10.99, 255);
-            Product p2 = new Product(2, "Product 2", 19.99, 22);
-            Product p3 = new Product(3, "Product 3", 7.99, 33);
-           // p1.save(connection);
-          //  p2.save(connection);
-          //  p3.save(connection);
-
-     
-            
+ 
             Admin a1 = new Admin(1, "Francesco", "Tarantino", "Test Street", "Administrator", "CEO and Dev");
-           // u1.save(connection);
-           // u2.save(connection);
-
-            // Create orders
-           
-   
-           //  Order o2 = new Order(2, u2);
-           // o1.addProduct(p1);
-           // o1.addProduct(p2);
-           // o2.addProduct(p2);
-           // o2.addProduct(p3);
-           // o1.save(connection);
-           // o2.save(connection);
-            
-            // Products Current List
-            
-            int totalProducts = 0;
+          
             
             List<Product> products = shop.getAllProducts(connection);
             System.out.println("*************************");
@@ -220,24 +197,27 @@ public class Main {
     			
     		case 2:
     			System.out.println("You are logged in as a User");
-    			System.out.println("Select an option (1, 2, 3) >");
-    			System.out.println("1. Buy");
-				System.out.println("3. Edit info");
+    			System.out.println("");
+    			System.out.println("Do you want to place an order?");
+    			System.out.println("(y/n)");
     			
     			
     		
-    			int userChoose = 0;
+    			String userChoose = "";
     			
     			Scanner uin = new Scanner(System.in);
     			
-    			userChoose = uin.nextInt();
+    			userChoose = uin.next();
     			
     			switch(userChoose) {
-    			case 1:
+    			case "y":
     				
-    				int orderid = 2;
+    				int min = 100; // Minimum value of range
+    			    int max = 998; // Maximum value of range
+    			    
+    				int orderid = (int)Math.floor(Math.random() * (max - min + 1) + min + 1);
     				
-    				Order order = new Order(orderid, new User("John", "Snow", "Winterfell", "User"), shop);
+    				Order order = new Order(orderid, new User("John", "Snow", "Winterfell", "User"), Arrays.asList(p1));
     			
     		        int productChoice = 1;
     		        while (productChoice != 0) {
@@ -247,38 +227,49 @@ public class Main {
     		                int productId = productChoice;
     		                Product product =  shop.getProductById(connection, productId);
     		                if (product != null) {
+    		                	
+    		                	
     		                    order.addProduct(product);
     		             
     		                    System.out.println("Product added to the order.");
+    		                    product.takeOne();
+    		                    int pleft = product.getQuantity();
+    		                    product.updateleft(connection, productId, pleft);
+    		                    order.update(connection);
+    		                    
     		                } else {
     		                    System.out.println("Product not found.");
     		                }
     		                
     		            }
     		        }
-    		        orderid++;
+    		     
     		        order.save(connection);
-    		        order.setProducts(shop.getProductsForOrder(connection, order.getId()));
+    		       
     		        
     		        System.out.println("Order ID: " + order.getId());
     		        System.out.println("User: " + order.getUser().getName());
     		        System.out.println("Shipment details: "+order.getUser().getAddress());
-    		        System.out.println("Products:"+order.getProducts());
+    		        System.out.println("Products:");
+    		        double total_price = 0;
+    		        order.setProducts(products);
     		        for (Product product : order.getProducts()) {
     		            System.out.println("Product ID: " + product.getId());
     		            System.out.println("Name: " + product.getname());
-    		            System.out.println("Price: " + product.getPrice());
+    		            System.out.println("Price: " + product.getPrice()+"$");
+    		         
+    		            total_price = total_price + product.getPrice();
     		            System.out.println("----------------------");
     		        }
+    		        
+    		        System.out.println("Total: "+total_price+"$");
+    		        break;
 
-    		       
-    		  
-    		        
-    		        
+    			case "n":
+    				System.out.println("Thank you for visiting our shop!");
+    				break;
+    				
     			}
-    			
-    			
-    			
     			
     			break;
     			}
