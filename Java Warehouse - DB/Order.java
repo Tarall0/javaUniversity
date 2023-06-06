@@ -4,9 +4,9 @@ import java.sql.*;
 class Order {
     private int id;
     private User user;
-    private static List<Product> products;
+    private List<Product> products;
 
-    public Order(int id, User user, Shop shop) {
+    public Order(int id, User user, List<Product> products) {
         this.id = id;
         this.user = user;
         this.products = new ArrayList<>();
@@ -25,8 +25,8 @@ class Order {
     }
     
     public void addProduct(Product product) {
-	products.add(product);
-    }
+		products.add(product);
+	}
 
     public void setProducts(List<Product> products) {
         this.products = products;
@@ -60,8 +60,5 @@ class Order {
             statement.executeUpdate();
         }
     }
-
-    
-
    
 }
