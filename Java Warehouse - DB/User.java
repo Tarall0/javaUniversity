@@ -42,23 +42,6 @@ public class User {
         }
     }
 
-    public void updateName(Connection connection) throws SQLException {
-        String query = "UPDATE user SET name = ? WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, name);
-            statement.setInt(2, id);
-            statement.executeUpdate();
-        }
-    }
-    
-    public void updateAddress(Connection connection) throws SQLException {
-    	String query = "UPDATE user SET address = ? WHERE id = ?";
-    	try (PreparedStatement statement = connection.prepareStatement(query)){
-    		statement.setString(4, address);
-    		statement.executeUpdate();
-    	}
-    }
-
     public void delete(Connection connection) throws SQLException {
         String query = "DELETE FROM user WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
