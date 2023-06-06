@@ -9,6 +9,10 @@ public class Product  {
 	private double price;
 	private int quantity;
 	
+	public Product() {
+	
+	}
+	
 	public Product(int id) {
 		this.id = id;
 	}
@@ -56,6 +60,15 @@ public class Product  {
             statement.executeUpdate();
         }
     }
+	
+	public void updateleft(Connection connection, int productId, int product_left)throws SQLException {
+		String query = "UPDATE products SET quantity = ? WHERE id=?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, product_left);
+			statement.setInt(2, productId);
+            statement.executeUpdate();
+        }
+	}
 
 	// Methods to get values from Product
 	
